@@ -28,8 +28,6 @@ jobs:
       - name: super-test
         shell: freebsd {0}
         run: |
-            which -a g++ || true
-            which -a clang++ || true
             cd ${{ github.workspace }}
             ./super-test.sh quick clang
 

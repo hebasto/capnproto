@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+set -x
+
 doit() {
   echo "@@@@ $@"
   "$@"
@@ -394,10 +396,15 @@ echo "========================================================================="
 if (${CXX:-g++} -dM -E -x c++ /dev/null 2>&1 | grep '__clang__' > /dev/null); then
   IS_CLANG=yes
   DISABLE_OPTIMIZATION_IF_GCC=
+  echo "================================================================== 397"
 else
   IS_CLANG=no
   DISABLE_OPTIMIZATION_IF_GCC=-O0
+  echo "================================================================== 401"
 fi
+
+echo "================================ IS_CLANG is $IS_CLANG"
+
 
 if [ $IS_CLANG = yes ]; then
   # Don't fail out on this ridiculous "argument unused during compilation" warning.
