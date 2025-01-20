@@ -409,7 +409,7 @@ echo "================================ IS_CLANG is $IS_CLANG"
 if [ $IS_CLANG = yes ]; then
   # Don't fail out on this ridiculous "argument unused during compilation" warning.
   export CXXFLAGS="$CXXFLAGS -Wno-error=unused-command-line-argument"
-  export LDFLAGS="$LDFLAGS -Wno-error=unused-command-line-argument"
+  export LDFLAGS="${LDFLAGS:-} -Wno-error=unused-command-line-argument"
 
   # Enable coroutines if supported.
   if [ "${CXX#*-}" -ge 14 ] 2>/dev/null; then
