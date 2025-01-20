@@ -443,6 +443,12 @@ fi
 
 cd c++
 doit autoreconf -i
+
+echo "========================================================================="
+printenv | sort
+echo "========================================================================="
+
+
 doit ./configure --prefix="$STAGING" || (cat config.log && exit 1)
 doit make -j$PARALLEL check
 
