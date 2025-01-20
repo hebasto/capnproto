@@ -17,7 +17,7 @@ distcheck-hook:
 
 AM_CXXFLAGS = -I$(srcdir)/src -I$(builddir)/src -DKJ_HEADER_WARNINGS -DCAPNP_HEADER_WARNINGS -DCAPNP_INCLUDE_DIR='"$(includedir)"' $(PTHREAD_CFLAGS)
 
-AM_LDFLAGS = $(PTHREAD_CFLAGS)
+# AM_LDFLAGS = $(PTHREAD_CFLAGS)
 
 EXTRA_DIST =                                                                 \
   README.txt                                                                 \
