@@ -78,7 +78,7 @@ AS_CASE("${host_os}", *mingw*, [
     AC_SUBST(PTHREAD_CC)
     AC_SUBST(ASYNC_LIBS)
   ], *, [
-    ACX_PTHREAD
+    AX_PTHREAD
     ASYNC_LIBS=""
     AC_SUBST(ASYNC_LIBS)
   ])
