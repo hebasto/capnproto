@@ -14,11 +14,11 @@ jobs:
       - name: Start FreeBSD VM
         uses: vmactions/freebsd-vm@v1
         with:
-          prepare: pkg install -y autoconf automake bash libtool
+          prepare: pkg install -y autoconf automake bash gcc libtool
           sync: 'rsync'
           copyback: false
       - name: super-test
         shell: freebsd {0}
         run: |
             cd ${{ github.workspace }}
-            ./super-test.sh quick nowerror clang
+            ./super-test.sh quick nowerror g++
