@@ -14,7 +14,7 @@ jobs:
       - name: Start FreeBSD VM
         uses: vmactions/freebsd-vm@v1
         with:
-          prepare: pkg install -y autoconf automake bash libtool
+          prepare: pkg install -y autoconf automake bash libtool pkgconf
           sync: 'rsync'
           copyback: false
       - name: super-test
