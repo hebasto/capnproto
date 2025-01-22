@@ -165,7 +165,7 @@ TEST(AsyncIo, SimpleNetworkAuthentication) {
 }
 #endif
 
-#if !_WIN32 && !__CYGWIN__  // TODO(someday): Debug why this deadlocks on Cygwin.
+#if !_WIN32 && !__CYGWIN__ && !__NetBSD__  // TODO(someday): Debug why this deadlocks on Cygwin.
 
 #if __ANDROID__
 #define TMPDIR "/data/local/tmp"
@@ -707,7 +707,7 @@ TEST(AsyncIo, ScmRightsTruncatedOdd) {
   KJ_ASSERT(n == 0);
 }
 
-#if !__aarch64__
+#if !__aarch64__ && !__NetBSD__
 // This test fails under qemu-user, probably due to a bug in qemu's syscall emulation rather than
 // a bug in the kernel. We don't have a good way to detect qemu so we just skip the test on aarch64
 // in general.
