@@ -910,7 +910,7 @@ KJ_TEST("DiskFile holes") {
     // Copy doesn't fill in holes.
     dir->transfer(Path("copy"), WriteMode::CREATE, Path("holes"), TransferMode::COPY);
     auto copy = dir->openFile(Path("copy"));
-#ifndef __FreeBSD__
+#if !defined(__FreeBSD__) && !defined(__NetBSD__)
     // The spaceUsed numbers on FreeBSD don't make any sense, but nobody has the time or interest
     // to figure out why. Oh well.
     KJ_EXPECT(copy->stat().spaceUsed == meta.spaceUsed);
@@ -928,7 +928,7 @@ KJ_TEST("DiskFile holes") {
 
   file->truncate(1 << 21);
   file->datasync();
-#ifndef __FreeBSD__
+#if !defined(__FreeBSD__) && !defined(__NetBSD__)
   // The spaceUsed numbers on FreeBSD don't make any sense, but nobody has the time or interest
   // to figure out why. Oh well.
   KJ_EXPECT(file->stat().spaceUsed == meta.spaceUsed);
@@ -940,7 +940,7 @@ KJ_TEST("DiskFile holes") {
   {
     dir->transfer(Path("copy"), WriteMode::MODIFY, Path("holes"), TransferMode::COPY);
     auto copy = dir->openFile(Path("copy"));
-#ifndef __FreeBSD__
+#if !defined(__FreeBSD__) && !defined(__NetBSD__)
     // The spaceUsed numbers on FreeBSD don't make any sense, but nobody has the time or interest
     // to figure out why. Oh well.
     KJ_EXPECT(copy->stat().spaceUsed == meta.spaceUsed);
@@ -966,7 +966,7 @@ KJ_TEST("DiskFile holes") {
 #endif
   file->zero(1 << 20, blockSize);
   file->datasync();
-#if !_WIN32 && !__FreeBSD__
+#if !defined(_WIN32) && !defined(__FreeBSD__) && !defined(__NetBSD__)
   // TODO(someday): This doesn't work on Windows. I don't know why. We're definitely using the
   //   proper ioctl. Oh well. It also doesn't work on FreeBSD-ZFS, due to the bug(?) mentioned
   //   earlier -- the size is just always reported as 512.
