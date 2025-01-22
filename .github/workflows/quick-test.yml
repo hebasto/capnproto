@@ -240,6 +240,7 @@ jobs:
           sync: rsync
           copyback: false
           prepare: /usr/sbin/pkg_add autoconf automake bash cmake gcc14 libtool pkg-config
+          run: sysctl -w security.pax.mprotect.global=0
       - name: super-test
         shell: netbsd {0}
         run: |
