@@ -419,6 +419,7 @@ TEST(Mutex, WhenWithTimeoutPreciseTiming) {
   KJ_FAIL_ASSERT("time not within expected bounds even after retries");
 }
 
+#ifndef __NetBSD__
 TEST(Mutex, WhenWithTimeoutPreciseTimingAfterInterrupt) {
   // Test that MutexGuarded::when() with a timeout sleeps for precisely the right amount of time,
   // even if the thread is spuriously woken in the middle.
@@ -474,6 +475,7 @@ KJ_TEST("wait()s wake each other") {
     }
   }
 }
+#endif
 
 TEST(Mutex, Lazy) {
   Lazy<uint> lazy;

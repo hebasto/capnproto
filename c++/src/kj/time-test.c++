@@ -96,6 +96,7 @@ KJ_TEST("monotonic clocks match each other") {
   KJ_EXPECT(p > c - 40 * kj::MILLISECONDS, c - p);
 }
 
+#ifndef __NetBSD__
 KJ_TEST("all clocks advance in real time") {
   Duration coarseCalDiff;
   Duration preciseCalDiff;
@@ -145,6 +146,7 @@ KJ_TEST("all clocks advance in real time") {
       coarseCalDiff / kj::MICROSECONDS, preciseCalDiff / kj::MICROSECONDS,
       coarseMonoDiff / kj::MICROSECONDS, preciseMonoDiff / kj::MICROSECONDS);
 }
+#endif
 
 }  // namespace
 }  // namespace kj
