@@ -151,14 +151,13 @@ typedef unsigned char byte;
 //   that is the standard compliant way. However, it's unclear how to use those macros (or any
 //   others) to distinguish between the compiler supporting feature detection and the feature being
 //   disabled vs the compiler not supporting feature detection at all.
-#if defined(__has_feature)
-  #if !defined(KJ_NO_RTTI) && !__has_feature(cxx_rtti)
-    #define KJ_NO_RTTI 1
-  #endif
-  #if !defined(KJ_NO_EXCEPTIONS) && !__has_feature(cxx_exceptions)
-    #define KJ_NO_EXCEPTIONS 1
-  #endif
-#elif defined(__GNUC__)
+#if !defined(KJ_NO_RTTI) && KJ_HAS_COMPILER_FEATURE(cxx_rtti)
+  #define KJ_NO_RTTI 0
+#endif
+#if !defined(KJ_NO_EXCEPTIONS) && KJ_HAS_COMPILER_FEATURE(cxx_exceptions)
+  #define KJ_NO_EXCEPTIONS 0
+#endif
+#if defined(__GNUC__)
   #if !defined(KJ_NO_RTTI) && !__GXX_RTTI
     #define KJ_NO_RTTI 1
   #endif
