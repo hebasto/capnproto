@@ -230,3 +230,23 @@ jobs:
         run: |
             cd ${{ github.workspace }}
             ./super-test.sh quick nowerror clang
+  NetBSD:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        release: ['10.1', '11.0']
+    steps:
+      - uses: actions/checkout@v6
+      - name: Start NetBSD VM
+        uses: vmactions/netbsd-vm@v1
+        with:
+          release: ${{ matrix.release }}
+          sync: rsync
+          copyback: false
+          prepare: pkg_add autoconf automake bash cmake libtool pkgconf
+      - name: super-test
+        shell: netbsd {0}
+        run: |
+          cd ${{ github.workspace }}
+          ./super-test.sh quick
