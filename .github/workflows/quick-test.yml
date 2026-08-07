@@ -1,13 +1,6 @@
 name: Quick Tests
 
-on:
-  pull_request:
-    paths-ignore:
-    - 'doc/**'
-  push:
-    branches:
-    - master
-    - 'release-*'
+on: [push]
 
 jobs:
   Linux-musl:
